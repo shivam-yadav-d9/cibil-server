@@ -8,7 +8,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import message from "./routes/messages.js";
 import notification from "./routes/notifications.js";
 import { Server } from "socket.io";
-import https from "https";
+import http from "http";
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Create HTTP server
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 // Initialize Socket.io with correct CORS settings
 const io = new Server(server, {
