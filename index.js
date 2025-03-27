@@ -8,7 +8,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import message from "./routes/messages.js";
 import notification from "./routes/notifications.js";
 import { Server } from "socket.io";
-import http from "http";
+import https from "https";
 
 dotenv.config();
 
@@ -16,12 +16,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Create HTTP server
-const server = http.createServer(app);
+const server = https.createServer(app);
 
 // Initialize Socket.io with correct CORS settings
 const io = new Server(server, {
   cors: {
-    origin: "https://cibilbankscore-client.vercel.app/", // ✅ Allow frontend
+    origin: "https://cibilbankscore-client.vercel.app", // ✅ Allow frontend
     methods: ["GET", "POST"]
   }
 });
@@ -46,7 +46,7 @@ io.on("connection", (socket) => {
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173", // ✅ Ensure this matches frontend origin
+  origin: "https://cibilbankscore-client.vercel.app", // ✅ Ensure this matches frontend origin
   methods: ["GET", "POST"]
 }));
 app.use(express.json());
